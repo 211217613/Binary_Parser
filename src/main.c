@@ -9,13 +9,24 @@
 void message(){
 	puts("Missing command line argument");
 }  
+
+int is_binValid(){
+/* Is it even a binary??? */
+}
+
+int identBin(){
+	/* Parse header infor and determine 
+		what kind of file it is. MachO ELF PE etc*/
+}
+
 int main(int argc, char * argv[]){
 	if(argc > 0 && argc < 2) {
 		message();
 		return -1;
 	}
 
-	FILE *bin = argv[1];
+	FILE *bin = NULL;
+	bin = fopen(argv[1], "rb");
 
 
 }
