@@ -1,32 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
-/* My first attempt at doing something cool
+#include <elf.h>
+#include <stdint.h>
+/*
+   My first attempt at doing something cool
    this program will load source code and just search for vulnerable 
    functions 
-  */
+*/
+
+Elf32_Ehdr *Ehdr;
 
 
-void message(){
-	puts("Missing command line argument");
-}  
-
-int is_binValid(){
+int is_binValid(FILE * bin){
 /* Is it even a binary??? */
+// Parse magic number of binary
+	Ehdr = bin;
+	//mak
+	puts("Checking if the binary is a valid x86_64 binary");
+	printf("Ehdr: %d\n",Ehdr[0] );
+	return 0;
 }
 
 int identBin(){
 	/* Parse header infor and determine 
 		what kind of file it is. MachO ELF PE etc*/
+	return 0;
 }
 
+
 int main(int argc, char * argv[]){
-	if(argc > 0 && argc < 2) {
-		message();
-		return -1;
+	FILE *bin = NULL;
+	bin = fopen(argv[1], "rb");														//open binary as read
+	if (NULL == bin){
+		puts("Error opening file");
+		exit(EXIT_FAILURE);
+	}
+	
+	if(argc != 2) {
+		printf("Usage: binary\n");
+		exit(EXIT_FAILURE);
 	}
 
-	FILE *bin = NULL;
-	bin = fopen(argv[1], "rb");
+	if ( NULL == bin )
+		puts("Error opening file");
+
+	if (is_binValid( bin) == -1){
+		exit(EXIT_FAILURE);
+	}
 
 
 }
